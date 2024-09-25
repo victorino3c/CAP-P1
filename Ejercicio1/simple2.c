@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
 
     long end_time = get_time_in_nanoseconds();
 
-    printf("Tiempo %lf \n", (double)(end_time - start_time)/ 1000000000L);
+    printf("Tiempo %ld \n", /*(double)*/(end_time - start_time)/*/ 1000000000L*/);
 
     return 0;
 }
