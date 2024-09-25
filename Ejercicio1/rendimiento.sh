@@ -3,7 +3,7 @@
 # Script para comparar tiempos de ejecución del mismo programa (simple2.c) con diferentes opciones de compilación (O0, O1, O2, O3 con y sin vectorización)
 
 # Inicializo variables
-repetitions=2
+repetitions=15
 fDat=rendimiento.dat
 fMed=medias.dat
 exe=ejecutable

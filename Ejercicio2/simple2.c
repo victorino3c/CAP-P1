@@ -22,6 +22,14 @@ int main(int argc, char *argv[]) {
 
     double m = 1.0001;
 
+    long trials;
+
+    if (argc > 1) {
+        trials = atol(argv[1]);
+    } else {
+        trials = NUMBER_OF_TRIALS;
+    }
+
     /* Populate A and B arrays */
     for (i=0; i < ARRAY_SIZE; i++) {
         b[i] = i;
@@ -31,7 +39,7 @@ int main(int argc, char *argv[]) {
     long start_time = get_time_in_nanoseconds();
 
     /* Perform an operation a number of times */
-    for (t=0; t < NUMBER_OF_TRIALS; t++) {
+    for (t=0; t < trials; t++) {
         for (i=0; i < ARRAY_SIZE; i++) {
             c += m*a[i] + b[i];
         }
