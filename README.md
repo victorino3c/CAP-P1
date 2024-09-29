@@ -26,3 +26,9 @@ Primer set de instrucciones: MMX (registros de 64 bits mmx: xmm0 al xmm7)
 Siguiente set: SSE (registros de 128 bits xmm)
 Tercer set: x86-64 (añade más registros al SSE: xmm8 al xmm15)
 Set actual: AVX (extiende los registros de 16 bytes (128 bits) a 32 bytes (256 bits), siendo: ymm0 al ymm15). A la parte inferior de los registros (128 bits) se accede con los registros xmmX)
+
+PREGUNTAS:
+- En el ejercicio 4, ¿es normal que el código modificado sea más de 2 veces que el código vectorizado?
+- Preguntar por la aceleración en el ejercicio 2
+- Preguntar por los resultados del ejercicio 1.2
+- Es normal que el codigo vectorizado sea mas lento que el codigo original?

@@ -74,7 +74,6 @@ for ((i=0; i < $repetitions - 1; i++)); do
     #Obtengo la linea i del fichero de datos
     linea=$(sed -n "$((i+1))p" $dat/$fDat)
 
-    #TODO: Arreglar esta parte del script para que calcule la media de los tiempos de ejecución
     #Obtengo los valores de la linea
     O0_noVector=$((O0_noVector + $(echo $linea | awk '{print $1}')))
     O0_vector=$((O0_vector + $(echo $linea | awk '{print $2}')))

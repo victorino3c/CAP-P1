@@ -89,7 +89,7 @@ int main(int nargs, char **argv)
 
         gettimeofday(&fin,NULL);
 
-	printf("Tiempo: %f\n", ((fin.tv_sec*1000000+fin.tv_usec)-(ini.tv_sec*1000000+ini.tv_usec))*1.0/1000000.0);
+        printf("Tiempo: %f\n", ((fin.tv_sec*1000000+fin.tv_usec)-(ini.tv_sec*1000000+ini.tv_usec))*1.0/1000000.0);
         free(grey_image_filename);
     }
 }
