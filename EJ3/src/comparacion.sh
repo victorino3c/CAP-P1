@@ -20,17 +20,17 @@ fi
 
 for ((i=1; i<=$repetitions; i+=1)); do
     
-    SD=$(./greyScale SD.jpg | grep 'Tiempo:' | awk '{print $2}')
-    HD=$(./greyScale HD.jpg | grep 'Tiempo:' | awk '{print $2}')
-    FHD=$(./greyScale FHD.jpg | grep 'Tiempo:' | awk '{print $2}')
-    ck=$(./greyScale 4k.jpg | grep 'Tiempo:' | awk '{print $2}')
-    ok=$(./greyScale 8k.jpg | grep 'Tiempo:' | awk '{print $2}')
+    SD=$(./greyScaleVectorized SD.jpg | grep 'Tiempo:' | awk '{print $2}')
+    HD=$(./greyScaleVectorized HD.jpg | grep 'Tiempo:' | awk '{print $2}')
+    FHD=$(./greyScaleVectorized FHD.jpg | grep 'Tiempo:' | awk '{print $2}')
+    ck=$(./greyScaleVectorized 4k.jpg | grep 'Tiempo:' | awk '{print $2}')
+    ok=$(./greyScaleVectorized 8k.jpg | grep 'Tiempo:' | awk '{print $2}')
 
-    SDV=$(./greyScaleVectorized SD.jpg | grep 'Tiempo:' | awk '{print $2}')
-    HDV=$(./greyScaleVectorized HD.jpg | grep 'Tiempo:' | awk '{print $2}')
-    FHDV=$(./greyScaleVectorized FHD.jpg | grep 'Tiempo:' | awk '{print $2}')
-    ckV=$(./greyScaleVectorized 4k.jpg | grep 'Tiempo:' | awk '{print $2}')
-    okV=$(./greyScaleVectorized 8k.jpg | grep 'Tiempo:' | awk '{print $2}')
+    SDV=$(./greyScaleModified SD.jpg | grep 'Tiempo:' | awk '{print $2}')
+    HDV=$(./greyScaleModified HD.jpg | grep 'Tiempo:' | awk '{print $2}')
+    FHDV=$(./greyScaleModified FHD.jpg | grep 'Tiempo:' | awk '{print $2}')
+    ckV=$(./greyScaleModified 4k.jpg | grep 'Tiempo:' | awk '{print $2}')
+    okV=$(./greyScaleModified 8k.jpg | grep 'Tiempo:' | awk '{print $2}')
 
     echo "$SD $HD $FHD $ck $ok $SDV $HDV $FHDV $ckV $okV" >> $fDat
 
@@ -80,7 +80,7 @@ ckV=$(echo "scale=6; $sum_ckV / $repetitions" | bc -l)
 okV=$(echo "scale=6; $sum_okV / $repetitions" | bc -l)
 
 # Guardamos las medias en un archivo
-echo "SD HD FHD 4k 8k SDV HDV FHDV 4kV 8kV" >> $fMed
+echo "SD        HD       FHD     4k      8k      SDV     HDV     FHDV    4kV     8kV" >> $fMed
 echo "$SD $HD $FHD $ck $ok $SDV $HDV $FHDV $ckV $okV" >> $fMed
 
 # Borramos las imagenes generadas

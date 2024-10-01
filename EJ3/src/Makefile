@@ -1,16 +1,23 @@
 CC = gcc
 LIBS = -lm
 LIB_DIR = 
+FLAGSV = -O3 -fno-tree-vectorize -march=native -fwhole-program -Wall -D_GNU_SOURCE
 FLAGS = -O3 -march=native -fwhole-program -Wall -D_GNU_SOURCE
 
 .PHONY: clean all
 
-all: greyScale greyScaleModified greyScaleVectorized clear
+all: greyScale greyScaleAV greyScaleModified greyScaleModifiedAV greyScaleVectorized clear
 
 greyScale: greyScale.c stb_image_write.h stb_image.h
+	$(CC) $(FLAGSV) -std=gnu99 $(LIB_DIR) -o $@ greyScale.c $(LIBS)
+
+greyScaleAV: greyScale.c stb_image_write.h stb_image.h
 	$(CC) $(FLAGS) -std=gnu99 $(LIB_DIR) -o $@ greyScale.c $(LIBS)
 
 greyScaleModified: greyScaleModified.c stb_image_write.h stb_image.h
+	$(CC) $(FLAGSV) -std=gnu99 $(LIB_DIR) -o $@ greyScaleModified.c $(LIBS)
+
+greyScaleModifiedAV: greyScaleModified.c stb_image_write.h stb_image.h
 	$(CC) $(FLAGS) -std=gnu99 $(LIB_DIR) -o $@ greyScaleModified.c $(LIBS)
 
 greyScaleVectorized: greyScaleVectorized.c stb_image_write.h stb_image.h
@@ -27,7 +34,7 @@ stb_image_write.h:
 	wget --no-check-certificate https://raw.githubusercontent.com/nothings/stb/master/stb_image_write.h
 
 clean:
-	rm -f *.o *.dat *~ greyScale greyScaleModified greyScaleVectorized
+	rm -f *.o *.dat *~ greyScale greyScaleAV greyScaleModified greyScaleModifiedAV greyScaleVectorized
 	
 clear:
 	rm -f *.o *~
