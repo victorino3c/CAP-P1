@@ -4,8 +4,8 @@
 # Para ello vamos a recomplilar los tiempos de cada uno para distintas calidades de imagen y luego compararlos
 
 # Parametros:
-fDat="datos.dat"
-fMed="medias.dat"
+fDat="datosMV.dat"
+fMed="mediasMV.dat"
 repetitions=10
 
 # Borramos el archivo de datos si existe
@@ -18,19 +18,22 @@ if [ -f $fMed ]; then
     rm $fMed
 fi
 
+touch $fDat 
+touch $fMed
+
 for ((i=1; i<=$repetitions; i+=1)); do
     
-    SD=$(./greyScaleVectorized SD.jpg | grep 'Tiempo:' | awk '{print $2}')
-    HD=$(./greyScaleVectorized HD.jpg | grep 'Tiempo:' | awk '{print $2}')
-    FHD=$(./greyScaleVectorized FHD.jpg | grep 'Tiempo:' | awk '{print $2}')
-    ck=$(./greyScaleVectorized 4k.jpg | grep 'Tiempo:' | awk '{print $2}')
-    ok=$(./greyScaleVectorized 8k.jpg | grep 'Tiempo:' | awk '{print $2}')
+    SDV=$(./greyScaleVectorized SD.jpg | grep 'Tiempo:' | awk '{print $2}')
+    HDV=$(./greyScaleVectorized HD.jpg | grep 'Tiempo:' | awk '{print $2}')
+    FHDV=$(./greyScaleVectorized FHD.jpg | grep 'Tiempo:' | awk '{print $2}')
+    ckV=$(./greyScaleVectorized 4k.jpg | grep 'Tiempo:' | awk '{print $2}')
+    okV=$(./greyScaleVectorized 8k.jpg | grep 'Tiempo:' | awk '{print $2}')
 
-    SDV=$(./greyScaleModified SD.jpg | grep 'Tiempo:' | awk '{print $2}')
-    HDV=$(./greyScaleModified HD.jpg | grep 'Tiempo:' | awk '{print $2}')
-    FHDV=$(./greyScaleModified FHD.jpg | grep 'Tiempo:' | awk '{print $2}')
-    ckV=$(./greyScaleModified 4k.jpg | grep 'Tiempo:' | awk '{print $2}')
-    okV=$(./greyScaleModified 8k.jpg | grep 'Tiempo:' | awk '{print $2}')
+    SD=$(./greyScale SD.jpg | grep 'Tiempo:' | awk '{print $2}')
+    HD=$(./greyScale HD.jpg | grep 'Tiempo:' | awk '{print $2}')
+    FHD=$(./greyScale FHD.jpg | grep 'Tiempo:' | awk '{print $2}')
+    ck=$(./greyScale 4k.jpg | grep 'Tiempo:' | awk '{print $2}')
+    ok=$(./greyScale 8k.jpg | grep 'Tiempo:' | awk '{print $2}')
 
     echo "$SD $HD $FHD $ck $ok $SDV $HDV $FHDV $ckV $okV" >> $fDat
 

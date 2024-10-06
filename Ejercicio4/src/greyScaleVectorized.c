@@ -17,9 +17,9 @@ static inline void getRGB(uint8_t *im, int width, int height, int nchannels, int
 
     unsigned char *offset = im + (x + width * y) * nchannels;
     // Cargar los primeros 8 bytes de la imagen en datal128
-    datal128 = _mm_set_epi8(0, 0, 0, 0, 0, 0, 0, 0, offset[7], offset[6], offset[5], offset[4], offset[3], offset[2], offset[1], offset[0]);
+    datal128 = _mm_loadu_si128((__m128i *)offset);
     // Cargar los siguientes 8 bytes de la imagen en datah128
-    datah128 = _mm_set_epi8(0, 0, 0, 0, 0, 0, 0, 0, offset[15], offset[14], offset[13], offset[12], offset[11], offset[10], offset[9], offset[8]);
+    datah128 = _mm_loadu_si128((__m128i *)(offset + 8));
 
     // Convertir a 32 bits enteros
     datal256 = _mm256_cvtepu8_epi32(datal128);
@@ -111,10 +111,12 @@ int main(int nargs, char **argv)
                 result256 = _mm256_hadd_ps(datal256ps, datah256ps);
                 result256 = _mm256_hadd_ps(result256, result256);
 
-                result256 = _mm256_permutevar8x32_ps(result256, _mm256_set_epi32(7, 1, 6, 0, 2, 3, 4, 5));
+                // result256 = _mm256_permutevar8x32_ps(result256, _mm256_set_epi32(7, 1, 6, 0, 2, 3, 4, 5));
 
                 // Convertir el resultado a enteros
-                result128 = _mm_cvtps_epi32(_mm256_extractf128_ps(result256, 0));
+                //result128 = _mm_cvtps_epi32(_mm256_extractf128_ps(result256, 0));
+                result128 = _mm_cvtps_epi32(_mm256_castps256_ps128(result256));
+
 
                 // Almacenar el resultado en la imagen de grises, teniendo en cuenta el little endian
                 grey_image[j * width + i + 3] = _mm_extract_epi32(result128, 0);
