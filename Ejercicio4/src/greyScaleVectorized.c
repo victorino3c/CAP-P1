@@ -111,7 +111,7 @@ int main(int nargs, char **argv)
                 result256 = _mm256_hadd_ps(datal256ps, datah256ps);
                 result256 = _mm256_hadd_ps(result256, result256);
 
-                // result256 = _mm256_permutevar8x32_ps(result256, _mm256_set_epi32(7, 1, 6, 0, 2, 3, 4, 5));
+                result256 = _mm256_permutevar8x32_ps(result256, _mm256_set_epi32(7, 1, 6, 0, 2, 3, 4, 5));
 
                 // Convertir el resultado a enteros
                 //result128 = _mm_cvtps_epi32(_mm256_extractf128_ps(result256, 0));

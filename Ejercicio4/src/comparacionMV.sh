@@ -29,13 +29,14 @@ for ((i=1; i<=$repetitions; i+=1)); do
     ckV=$(./greyScaleVectorized 4k.jpg | grep 'Tiempo:' | awk '{print $2}')
     okV=$(./greyScaleVectorized 8k.jpg | grep 'Tiempo:' | awk '{print $2}')
 
-    SD=$(./greyScale SD.jpg | grep 'Tiempo:' | awk '{print $2}')
-    HD=$(./greyScale HD.jpg | grep 'Tiempo:' | awk '{print $2}')
-    FHD=$(./greyScale FHD.jpg | grep 'Tiempo:' | awk '{print $2}')
-    ck=$(./greyScale 4k.jpg | grep 'Tiempo:' | awk '{print $2}')
-    ok=$(./greyScale 8k.jpg | grep 'Tiempo:' | awk '{print $2}')
+    SD=$(./greyScaleModified SD.jpg | grep 'Tiempo:' | awk '{print $2}')
+    HD=$(./greyScaleModified HD.jpg | grep 'Tiempo:' | awk '{print $2}')
+    FHD=$(./greyScaleModified FHD.jpg | grep 'Tiempo:' | awk '{print $2}')
+    ck=$(./greyScaleModified 4k.jpg | grep 'Tiempo:' | awk '{print $2}')
+    ok=$(./greyScaleModified 8k.jpg | grep 'Tiempo:' | awk '{print $2}')
 
     echo "$SD $HD $FHD $ck $ok $SDV $HDV $FHDV $ckV $okV" >> $fDat
+    echo "Iteración $i completada"
 
 done
 
